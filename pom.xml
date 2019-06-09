@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
+        <module>rabbitmq-common</module>
         <module>rabbitmq-simple-example</module>
         <module>rabbitmq-work-example</module>
         <module>rabbitmq-publish_subscribe-example</module>
