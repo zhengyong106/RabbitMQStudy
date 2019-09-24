@@ -17,7 +17,7 @@ public class ReceiveLogs {
         channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
         // 创建临时列队，并返回列队名字（实际等同于channel.queueDeclare(queue=QUEUE_NAME, durable=false, exclusive=true, autoDelete=true, arguments=null);）
         String queueName = channel.queueDeclare().getQueue();
-        // 将临时列队和交换机进行绑定（告诉交换机将消息发送到哪个队列）
+        // 将临时列队和交换机进行绑定（告诉交换机将消息发送到哪个队列），扇形交换机不需要routingKey
         channel.queueBind(queueName, EXCHANGE_NAME, "");
 
         // 声明消息传递后的回调函数

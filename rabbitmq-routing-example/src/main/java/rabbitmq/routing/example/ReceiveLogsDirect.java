@@ -18,12 +18,13 @@ public class ReceiveLogsDirect {
         String queueName = channel.queueDeclare().getQueue();
 
         // 将临时列队和交换机进行绑定（交换机通过路由键将消息发送到指定队列）
-        channel.queueBind(queueName, EXCHANGE_NAME, "#");
+        channel.queueBind(queueName, EXCHANGE_NAME, "error");
+        channel.queueBind(queueName, EXCHANGE_NAME, "info");
 
         // 声明消息传递后的回调函数
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
-            System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + message + "'");
+            System.out.println(" [x] Received " + delivery.getEnvelope().getRoutingKey() + ":'" + message + "'");
         };
         // 监听队列, 添加接收回调和取消回调
         channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });

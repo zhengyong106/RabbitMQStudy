@@ -16,7 +16,7 @@ public class EmitLogTopic {
         // 声明（创建）交换机，使用direct模式
         channel.exchangeDeclare(EXCHANGE_NAME, "topic");
 
-        String routingKey = "error.kern";
+        String routingKey = "message.error";
         String message = "Hello World";
         // 通过通道发布消息（通过exchangeName和exchange绑定的routingKey指定发布到的消息队列）
         channel.basicPublish(EXCHANGE_NAME, routingKey, null, message.getBytes("UTF-8"));
@@ -26,5 +26,4 @@ public class EmitLogTopic {
         channel.close();
         connection.close();
     }
-    //..
 }

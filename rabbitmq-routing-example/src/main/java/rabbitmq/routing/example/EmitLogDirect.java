@@ -24,6 +24,8 @@ public class EmitLogDirect {
             channel.basicPublish(EXCHANGE_NAME, severity, null, message.getBytes("UTF-8"));
             System.out.println(" [x] Sent '" + severity + "':'" + message + "'");
         }
+
+        ConnectionUtil.close(channel);
+        ConnectionUtil.close(connection);
     }
-    //..
 }

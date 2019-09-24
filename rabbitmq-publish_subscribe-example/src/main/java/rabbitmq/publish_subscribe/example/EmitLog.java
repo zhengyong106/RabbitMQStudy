@@ -17,7 +17,7 @@ public class EmitLog {
         channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
 
         String message = "Hello World!";
-        // 通过通道发布消息（通过exchange指定发布到的消息队列）
+        // 通过通道发布消息（通过exchange指定发布到的消息队列），扇形交换机不需要routingKey
         channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes("UTF-8"));
         System.out.println(" [x] Sent '" + message + "'");
 

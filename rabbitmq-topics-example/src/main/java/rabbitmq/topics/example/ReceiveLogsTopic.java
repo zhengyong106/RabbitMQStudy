@@ -21,13 +21,11 @@ public class ReceiveLogsTopic {
         // 将临时列队和交换机进行绑定（告诉交换机将消息发送到哪个队列）
         // 当绑定的交换机为topic模式时，routingKey必须为.分隔开的单词列表
         // # 表示所有单词，* 表示单个单词
-        channel.queueBind(queueName, EXCHANGE_NAME, "warning.#");
-        channel.queueBind(queueName, EXCHANGE_NAME, "error.#");
+        channel.queueBind(queueName, EXCHANGE_NAME, "message.#");
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
-            System.out.println(" [x] Received '" +
-                    delivery.getEnvelope().getRoutingKey() + "':'" + message + "'");
+            System.out.println(" [x] Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + message + "'");
         };
         channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
     }
